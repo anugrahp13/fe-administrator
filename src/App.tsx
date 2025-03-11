@@ -1,14 +1,17 @@
-import { Button } from './components/ui/button'
+import { Route, Routes } from "react-router-dom";
+import Layout from "./layouts/layout";
+import Dashboard from "./pages/dashboard/Dashboard";
 
 function App() {
-
   return (
     <>
-      <div className="flex flex-col items-center justify-center min-h-svh">
-      <Button>Click me</Button>
-    </div>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+        </Routes>
+      </Layout>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
