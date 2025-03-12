@@ -75,7 +75,5 @@ export function NavManagements({
         ))}
       </SidebarMenu>
     </SidebarGroup>
-
-    //nav main
   );
 }
