@@ -58,9 +58,9 @@ interface DataMenu {
 
 export const dataMenu: DataMenu = {
   user: {
-    name: "Hafnan Mart",
-    email: "hallo@hafnanstore.com",
-    avatar: "/image/avatar/hafnanmart.png",
+    name: "Anugrah Prastyo",
+    email: "anugrahprastyo13@gmail.com",
+    avatar: "/image/avatar/avatar.png",
   },
   teams: [
     {
