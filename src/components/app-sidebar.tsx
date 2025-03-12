@@ -19,8 +19,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <TeamSwitcher teams={dataMenu.teams} />
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={dataMenu.navMain} />
-        <NavManagements managements={dataMenu.managements} />
+        <NavMain managements={dataMenu.navMain} />
+        <NavManagements items={dataMenu.managements} />
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={dataMenu.user} />
