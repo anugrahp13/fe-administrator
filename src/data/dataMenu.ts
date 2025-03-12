@@ -2,12 +2,7 @@ import {
   GalleryVerticalEnd,
   AudioWaveform,
   Command,
-  Bot,
-  BookOpen,
   Settings2,
-  Frame,
-  PieChart,
-  Map,
   LucideIcon,
   Database,
   Package,
@@ -16,6 +11,16 @@ import {
   ShoppingBag,
   SquareUser,
   NotebookPen,
+  FileText,
+  FileChartColumn,
+  FileChartLine,
+  ShoppingCart,
+  CircleDollarSign,
+  Computer,
+  Store,
+  Users,
+  Banknote,
+  BellRing,
 } from "lucide-react";
 
 interface Team {
@@ -25,17 +30,17 @@ interface Team {
 }
 
 interface NavItem {
+  name: string;
+  url: string;
+  icon: LucideIcon;
+}
+
+interface Management {
   title: string;
   url: string;
   icon?: LucideIcon;
   isActive?: boolean;
   items?: { title: string; url: string; icon: LucideIcon }[];
-}
-
-interface Management {
-  name: string;
-  url: string;
-  icon: LucideIcon;
 }
 
 interface User {
@@ -53,9 +58,9 @@ interface DataMenu {
 
 export const dataMenu: DataMenu = {
   user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
+    name: "Hafnan Mart",
+    email: "hallo@hafnanstore.com",
+    avatar: "/image/avatar/hafnanmart.png",
   },
   teams: [
     {
@@ -76,6 +81,18 @@ export const dataMenu: DataMenu = {
   ],
   navMain: [
     {
+      name: "Sales Transactions",
+      url: "#",
+      icon: ShoppingCart,
+    },
+    {
+      name: "Shift",
+      url: "#",
+      icon: Computer,
+    },
+  ],
+  managements: [
+    {
       title: "Database",
       url: "#",
       icon: Database,
@@ -87,27 +104,16 @@ export const dataMenu: DataMenu = {
         { title: "Purchase", url: "#", icon: ShoppingBag },
         { title: "Customer", url: "#", icon: SquareUser },
         { title: "Debt", url: "#", icon: NotebookPen },
+        { title: "Finance", url: "#", icon: CircleDollarSign },
       ],
     },
     {
-      title: "Models",
+      title: "Report",
       url: "#",
-      icon: Bot,
+      icon: FileText,
       items: [
-        { title: "Genesis", url: "#", icon: Package },
-        { title: "Explorer", url: "#", icon: Package },
-        { title: "Quantum", url: "#", icon: Package },
-      ],
-    },
-    {
-      title: "Documentation",
-      url: "#",
-      icon: BookOpen,
-      items: [
-        { title: "Introduction", url: "#", icon: Package },
-        { title: "Get Started", url: "#", icon: Package },
-        { title: "Tutorials", url: "#", icon: Package },
-        { title: "Changelog", url: "#", icon: Package },
+        { title: "Sales Report", url: "#", icon: FileChartColumn },
+        { title: "Purchase Report", url: "#", icon: FileChartLine },
       ],
     },
     {
@@ -115,28 +121,12 @@ export const dataMenu: DataMenu = {
       url: "#",
       icon: Settings2,
       items: [
-        { title: "General", url: "#", icon: Package },
-        { title: "Team", url: "#", icon: Package },
-        { title: "Billing", url: "#", icon: Package },
-        { title: "Limits", url: "#", icon: Package },
+        { title: "Shop", url: "#", icon: Store },
+        { title: "Management Staff", url: "#", icon: Users },
+        { title: "Payment Methods", url: "#", icon: Banknote },
+        { title: "Notification Settings", url: "#", icon: BellRing },
+        { title: "Transaction Settings", url: "#", icon: ShoppingCart },
       ],
-    },
-  ],
-  managements: [
-    {
-      name: "Design Engineering",
-      url: "#",
-      icon: Frame,
-    },
-    {
-      name: "Sales & Marketing",
-      url: "#",
-      icon: PieChart,
-    },
-    {
-      name: "Travel",
-      url: "#",
-      icon: Map,
     },
   ],
 };
