@@ -6,6 +6,7 @@ interface Sales {
   result: number;
   value: number;
   percent: string;
+  bgColor: string;
   status?: { id: number; name: string }[];
 }
 interface Income {
@@ -15,6 +16,7 @@ interface Income {
   result: number;
   value: number;
   percent: string;
+  bgColor: string;
   status?: { id: number; name: string }[];
 }
 interface Item {
@@ -22,12 +24,14 @@ interface Item {
   date: string;
   icon?: LucideIcon;
   result: number;
+  bgColor: string;
 }
 interface Customer {
   title: string;
   date: string;
   icon?: LucideIcon;
   result: number;
+  bgColor: string;
 }
 interface DataDashboard {
   sales: Sales[];
@@ -40,11 +44,12 @@ export const dataDashboard: DataDashboard = {
   sales: [
     {
       title: "Sales",
-      date: "Hari ini",
+      date: "Today",
       icon: ShoppingCart,
       result: 3590,
       value: 35,
       percent: "%",
+      bgColor: "bg-purple-500",
       status: [
         {
           id: 1,
@@ -60,11 +65,12 @@ export const dataDashboard: DataDashboard = {
   income: [
     {
       title: "Income",
-      date: "Hari ini",
+      date: "Today",
       icon: Banknote,
       result: 12908000,
       value: 80,
       percent: "%",
+      bgColor: "bg-green-500",
       status: [
         {
           id: 1,
@@ -80,17 +86,19 @@ export const dataDashboard: DataDashboard = {
   item: [
     {
       title: "Item",
-      date: "Hari ini",
+      date: "Today",
       icon: Package,
       result: 700,
+      bgColor: "bg-blue-500",
     },
   ],
   customer: [
     {
       title: "Customer",
-      date: "Hari ini",
+      date: "Today",
       icon: SquareUser,
       result: 30,
+      bgColor: "bg-yellow-500",
     },
   ],
 };
