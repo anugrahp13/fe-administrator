@@ -6,7 +6,7 @@
   margin-inline: auto;
 }
 @theme {
-  --font-poppins: Quicksand, sans-serif;
+  --font-display: "Quicksand", "sans-serif";
   --breakpoint-2xl: 1320px;
   --color-primary: #1f509a;
   --color-secondary: #64748b;
