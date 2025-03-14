@@ -34,20 +34,20 @@ interface Item {
   bgColor: string;
   status?: { id: number; name: string }[];
 }
-interface Customer {
-  title: string;
-  date: string;
-  icon?: LucideIcon;
-  result: number;
-  value: number;
-  bgColor: string;
-  status?: { id: number; name: string }[];
-}
+// interface Customer {
+//   title: string;
+//   date: string;
+//   icon?: LucideIcon;
+//   result: number;
+//   value: number;
+//   bgColor: string;
+//   status?: { id: number; name: string }[];
+// }
 interface DataDashboard {
   sales: Sales[];
   income: Income[];
   item: Item[];
-  customer: Customer[];
+  // customer: Customer[];
 }
 
 export const dataDashboard: DataDashboard = {
@@ -63,7 +63,7 @@ export const dataDashboard: DataDashboard = {
       status: [
         {
           id: 1,
-          name: "increase",
+          name: "increase Transaction",
         },
         {
           id: 2,
@@ -113,24 +113,24 @@ export const dataDashboard: DataDashboard = {
       ],
     },
   ],
-  customer: [
-    {
-      title: "Customer",
-      date: "Today",
-      icon: SquareUser,
-      result: 30,
-      value: 2,
-      bgColor: "bg-yellow-500",
-      status: [
-        {
-          id: 1,
-          name: "increase",
-        },
-        {
-          id: 2,
-          name: "decreases",
-        },
-      ],
-    },
-  ],
+  // customer: [
+  //   {
+  //     title: "Customer",
+  //     date: "Today",
+  //     icon: SquareUser,
+  //     result: 30,
+  //     value: 2,
+  //     bgColor: "bg-yellow-500",
+  //     status: [
+  //       {
+  //         id: 1,
+  //         name: "increase",
+  //       },
+  //       {
+  //         id: 2,
+  //         name: "decreases",
+  //       },
+  //     ],
+  //   },
+  // ],
 };
