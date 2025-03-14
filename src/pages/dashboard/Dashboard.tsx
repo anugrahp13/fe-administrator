@@ -1,5 +1,6 @@
 import { CardInfo } from "@/components/card-info";
 import { dataDashboard } from "@/data/dataDashboard";
+import { VisitorChart } from "./visitorChart";
 export default function Dashboard() {
   return (
     <>
@@ -55,7 +56,11 @@ export default function Dashboard() {
             ))
           )}
         </div>
-        <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min" />
+        <div className="w-full md:w-1/2">
+        <VisitorChart />
+        </div>
+        <div className="w-full md:w-1/2">
+        </div>
       </div>
     </>
   );
