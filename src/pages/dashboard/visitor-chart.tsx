@@ -18,6 +18,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { ChartConfig, ChartContainer } from "@/components/ui/chart";
+import { DatePickerRange } from "@/components/date-pickerrange";
 const chartData = [
   { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
 ];
@@ -36,12 +37,15 @@ export function VisitorChart() {
   return (
     <Card className="flex flex-col">
       <CardHeader className="items-center pb-0">
-        <div className="flex justify-between items-center">
-          <div className="grid gap-1">
-            <CardTitle>Radial Chart - Text</CardTitle>
-            <CardDescription>January - June 2024</CardDescription>
-          </div>
+        <div className="flex justify-between">
+          <CardTitle className="font-bold">Visitor Website</CardTitle>
+          <CardDescription className="dark:text-white font-semibold">
+            January - June 2024
+          </CardDescription>
         </div>
+        <CardDescription className="flex justify-center items-center font-semibold">
+          <DatePickerRange />
+        </CardDescription>
       </CardHeader>
       <CardContent className="flex-1 pb-0">
         <ChartContainer
@@ -84,7 +88,7 @@ export function VisitorChart() {
                         <tspan
                           x={viewBox.cx}
                           y={(viewBox.cy || 0) + 24}
-                          className="fill-muted-foreground"
+                          className="fill-muted-foreground dark:fill-neutral-50"
                         >
                           Visitors
                         </tspan>
