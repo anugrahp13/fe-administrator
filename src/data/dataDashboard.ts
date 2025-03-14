@@ -1,4 +1,10 @@
-import { Banknote, LucideIcon, Package, ShoppingCart, SquareUser } from "lucide-react";
+import {
+  Banknote,
+  LucideIcon,
+  Package,
+  ShoppingCart,
+  SquareUser,
+} from "lucide-react";
 interface Sales {
   title: string;
   date: string;
@@ -24,14 +30,18 @@ interface Item {
   date: string;
   icon?: LucideIcon;
   result: number;
+  value: number;
   bgColor: string;
+  status?: { id: number; name: string }[];
 }
 interface Customer {
   title: string;
   date: string;
   icon?: LucideIcon;
   result: number;
+  value: number;
   bgColor: string;
+  status?: { id: number; name: string }[];
 }
 interface DataDashboard {
   sales: Sales[];
@@ -89,7 +99,18 @@ export const dataDashboard: DataDashboard = {
       date: "Today",
       icon: Package,
       result: 700,
+      value: 10,
       bgColor: "bg-blue-500",
+      status: [
+        {
+          id: 1,
+          name: "increase",
+        },
+        {
+          id: 2,
+          name: "decreases",
+        },
+      ],
     },
   ],
   customer: [
@@ -98,7 +119,18 @@ export const dataDashboard: DataDashboard = {
       date: "Today",
       icon: SquareUser,
       result: 30,
+      value: 2,
       bgColor: "bg-yellow-500",
+      status: [
+        {
+          id: 1,
+          name: "increase",
+        },
+        {
+          id: 2,
+          name: "decreases",
+        },
+      ],
     },
   ],
 };
