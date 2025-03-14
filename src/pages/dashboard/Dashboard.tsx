@@ -1,6 +1,6 @@
 import { CardInfo } from "@/components/card-info";
 import { dataDashboard } from "@/data/dataDashboard";
-import { VisitorChart } from "./visitorChart";
+import { VisitorChart } from "./visitor-chart";
 export default function Dashboard() {
   return (
     <>
