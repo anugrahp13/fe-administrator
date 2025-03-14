@@ -1,3 +1,5 @@
+import { DateToggle } from "./date-toggle";
+
 interface CardInfoProps {
   header: string;
   subheader: string;
@@ -17,6 +19,7 @@ export const CardInfo: React.FC<CardInfoProps> = ({
             <span className="text-sm text-primary">{subheader}</span>
           )}
         </div>
+        <DateToggle />
       </div>
       {children}
     </div>
