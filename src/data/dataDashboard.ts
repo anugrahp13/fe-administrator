@@ -3,7 +3,6 @@ import {
   LucideIcon,
   Package,
   ShoppingCart,
-  SquareUser,
 } from "lucide-react";
 interface Sales {
   title: string;
