@@ -98,7 +98,7 @@ export const dataMenu: DataMenu = {
       icon: Database,
       isActive: true,
       items: [
-        { title: "Items", url: "#", icon: Package },
+        { title: "Items", url: "/item", icon: Package },
         { title: "Item Category", url: "#", icon: ChartColumnStacked },
         { title: "Stock Management", url: "#", icon: Layers },
         { title: "Purchase", url: "#", icon: ShoppingBag },
