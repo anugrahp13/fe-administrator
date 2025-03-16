@@ -21,61 +21,63 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { Menubar, MenubarMenu, MenubarTrigger } from "@/components/ui/menubar";
+import { useState } from "react";
 export type Payment = {
   id: string;
-  active: "Active" | "Inactive";
   name: string;
+  category: string;
+  stock: number;
   sellingPrice: number;
   purchasePrice: number;
   status: "Ready" | "Sold Out";
-  stock: number;
 };
 
 const data: Payment[] = [
   {
     id: "m5gr84i9",
-    active: "Active",
     name: "Gula Putih 1 kg",
+    category: "Gula Pasir",
+    stock: 290,
     sellingPrice: 18500,
     purchasePrice: 16400,
     status: "Ready",
-    stock: 290,
   },
   {
     id: "3u1reuv4",
-    active: "Inactive",
     name: "Tepung Segitiga 1 kg",
+    category: "Tepung",
+    stock: 200,
     sellingPrice: 10500,
     purchasePrice: 9800,
     status: "Ready",
-    stock: 200,
   },
   {
     id: "derv1ws0",
-    active: "Active",
     name: "Tepung Lencana 1 kg",
+    category: "Tepung",
+    stock: 167,
     sellingPrice: 9000,
     purchasePrice: 7650,
     status: "Sold Out",
-    stock: 167,
   },
   {
     id: "5kma53ae",
-    active: "Inactive",
     name: "Minyak Goreng 1 kg",
+    category: "Minyak Goreng",
+    stock: 908,
     sellingPrice: 21000,
     purchasePrice: 18675,
     status: "Ready",
-    stock: 908,
   },
   {
     id: "bhqecj4p",
-    active: "Inactive",
-    name: "Tepung Besar 500 g",
+    name: "Tepung Besar 500 gr",
+    category: "Tepung",
+    stock: 50,
     sellingPrice: 8000,
     purchasePrice: 6789,
     status: "Sold Out",
-    stock: 50,
   },
 ];
 
@@ -108,6 +110,18 @@ const columns: ColumnDef<Payment>[] = [
     cell: ({ row }) => <div className="capitalize">{row.original.name}</div>,
   },
   {
+    accessorKey: "category",
+    header: "Kategori",
+    cell: ({ row }) => (
+      <div className="capitalize">{row.original.category}</div>
+    ),
+  },
+  {
+    accessorKey: "stock",
+    header: "Stok",
+    cell: ({ row }) => <div className="lowercase">{row.original.stock}</div>,
+  },
+  {
     accessorKey: "sellingPrice",
     header: "Harga Jual",
     cell: ({ row }) => (
@@ -130,18 +144,7 @@ const columns: ColumnDef<Payment>[] = [
     header: "Status",
     cell: ({ row }) => <div className="capitalize">{row.original.status}</div>,
   },
-  {
-    accessorKey: "stock",
-    header: "Stok",
-    cell: ({ row }) => <div className="lowercase">{row.original.stock}</div>,
-  },
-  {
-    accessorKey: "active",
-    header: "Aktif",
-    cell: ({ row }) => (
-      <div className="font-medium">{row.original.active}</div>
-    ),
-  },
+
   {
     id: "actions",
     cell: ({ row }) => {
@@ -183,25 +186,54 @@ const columns: ColumnDef<Payment>[] = [
 ];
 
 export default function ItemsPage() {
+  const [filterStatus, setFilterStatus] = useState<
+    "Ready" | "Sold Out" | "All"
+  >("All");
+  const filteredData =
+    filterStatus === "All"
+      ? data
+      : data.filter((item) => item.status === filterStatus);
   return (
     <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-      <div className="flex flex-col justify-between w-full mx-auto gap-1">
-        <div className="text-2xl lg:text-3xl font-bold">Item List</div>
-        <Breadcrumb>
-          <BreadcrumbList>
-            <BreadcrumbItem className="hidden md:block">
-              <BreadcrumbLink href="/">Dashboard</BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator className="hidden md:block" />
-            <BreadcrumbItem>
-              <BreadcrumbPage>Item List</BreadcrumbPage>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
+      <div className="flex justify-between w-full mx-auto gap-1">
+        <div className="flex flex-col">
+          <div className="text-2xl lg:text-3xl font-bold">Item List</div>
+          <Breadcrumb>
+            <BreadcrumbList>
+              <BreadcrumbItem className="hidden md:block">
+                <BreadcrumbLink href="/">Dashboard</BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator className="hidden md:block" />
+              <BreadcrumbItem>
+                <BreadcrumbPage>Item List</BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+        </div>
+        <div className="flex items-center gap-2">
+          <Menubar>
+            <MenubarMenu>
+              <MenubarTrigger onClick={() => setFilterStatus("All")}>
+                All ({data.length})
+              </MenubarTrigger>
+            </MenubarMenu>
+            <MenubarMenu>
+              <MenubarTrigger onClick={() => setFilterStatus("Ready")}>
+                Ready ({data.filter((item) => item.status === "Ready").length})
+              </MenubarTrigger>
+            </MenubarMenu>
+            <MenubarMenu>
+              <MenubarTrigger onClick={() => setFilterStatus("Sold Out")}>
+                Sold Out (
+                {data.filter((item) => item.status === "Sold Out").length})
+              </MenubarTrigger>
+            </MenubarMenu>
+          </Menubar>
+        </div>
       </div>
       <DataTable
         columns={columns}
-        data={data}
+        data={filteredData}
         filterPlaceholder="Search items . . ."
       />
     </div>
