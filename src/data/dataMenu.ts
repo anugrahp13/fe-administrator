@@ -21,6 +21,7 @@ import {
   Users,
   Banknote,
   BellRing,
+  House,
 } from "lucide-react";
 
 interface Team {
@@ -80,6 +81,11 @@ export const dataMenu: DataMenu = {
     },
   ],
   navMain: [
+    {
+      name: "Dashboard",
+      url: "/",
+      icon: House,
+    },
     {
       name: "Sales Transactions",
       url: "#",
