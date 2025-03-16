@@ -13,9 +13,17 @@ import {
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import { Checkbox } from "@/components/ui/checkbox";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 export type Payment = {
   id: string;
-  amount: number;
+  active: "Active" | "Inactive";
   name: string;
   sellingPrice: number;
   purchasePrice: number;
@@ -26,7 +34,7 @@ export type Payment = {
 const data: Payment[] = [
   {
     id: "m5gr84i9",
-    amount: 316,
+    active: "Active",
     name: "Gula Putih 1 kg",
     sellingPrice: 18500,
     purchasePrice: 16400,
@@ -35,7 +43,7 @@ const data: Payment[] = [
   },
   {
     id: "3u1reuv4",
-    amount: 242,
+    active: "Inactive",
     name: "Tepung Segitiga 1 kg",
     sellingPrice: 10500,
     purchasePrice: 9800,
@@ -44,7 +52,7 @@ const data: Payment[] = [
   },
   {
     id: "derv1ws0",
-    amount: 837,
+    active: "Active",
     name: "Tepung Lencana 1 kg",
     sellingPrice: 9000,
     purchasePrice: 7650,
@@ -53,7 +61,7 @@ const data: Payment[] = [
   },
   {
     id: "5kma53ae",
-    amount: 874,
+    active: "Inactive",
     name: "Minyak Goreng 1 kg",
     sellingPrice: 21000,
     purchasePrice: 18675,
@@ -62,7 +70,7 @@ const data: Payment[] = [
   },
   {
     id: "bhqecj4p",
-    amount: 721,
+    active: "Inactive",
     name: "Tepung Besar 500 g",
     sellingPrice: 8000,
     purchasePrice: 6789,
@@ -131,7 +139,7 @@ const columns: ColumnDef<Payment>[] = [
     accessorKey: "active",
     header: "Aktif",
     cell: ({ row }) => (
-      <div className="font-medium">${row.original.amount}</div>
+      <div className="font-medium">{row.original.active}</div>
     ),
   },
   {
@@ -163,7 +171,7 @@ const columns: ColumnDef<Payment>[] = [
             </DropdownMenuItem>
             <DropdownMenuItem>
               <span className="flex justify-center items-center gap-2">
-              <Trash2 />
+                <Trash2 />
                 Delete
               </span>
             </DropdownMenuItem>
@@ -176,12 +184,25 @@ const columns: ColumnDef<Payment>[] = [
 
 export default function ItemsPage() {
   return (
-    <div className="p-6">
-      <h1 className="text-xl font-semibold mb-4">Items List</h1>
+    <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
+      <div className="flex flex-col justify-between w-full mx-auto gap-1">
+        <div className="text-2xl lg:text-3xl font-bold">Item List</div>
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem className="hidden md:block">
+              <BreadcrumbLink href="/">Dashboard</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator className="hidden md:block" />
+            <BreadcrumbItem>
+              <BreadcrumbPage>Item List</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+      </div>
       <DataTable
         columns={columns}
         data={data}
-        filterPlaceholder="Search email..."
+        filterPlaceholder="Search items . . ."
       />
     </div>
   );
