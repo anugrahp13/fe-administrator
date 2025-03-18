@@ -8,17 +8,6 @@ export default function Dashboard() {
       <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
         <div className="flex flex-col justify-between w-full mx-auto">
           <div className="text-2xl lg:text-3xl font-bold">Dashboard</div>
-          {/* <Breadcrumb>
-            <BreadcrumbList>
-              <BreadcrumbItem className="hidden md:block">
-                <BreadcrumbLink href="#">Dashboard</BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator className="hidden md:block" />
-              <BreadcrumbItem>
-                <BreadcrumbPage>Data Fetching</BreadcrumbPage>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb> */}
         </div>
         <div className="grid auto-rows-min gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
           {Object.values(dataDashboard).map((category) =>

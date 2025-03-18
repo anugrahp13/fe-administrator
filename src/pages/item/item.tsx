@@ -1,5 +1,3 @@
-"use client";
-
 import { ColumnDef } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
 import { MoreHorizontal, Pencil, Trash2 } from "lucide-react";
@@ -74,7 +72,7 @@ const data: Payment[] = [
     id: "bhqecj4p",
     name: "Tepung Besar 500 gr",
     category: "Tepung",
-    stock: 50,
+    stock: 4,
     sellingPrice: 8000,
     purchasePrice: 6789,
     status: "Sold Out",
@@ -187,11 +185,13 @@ const columns: ColumnDef<Payment>[] = [
 
 export default function ItemsPage() {
   const [filterStatus, setFilterStatus] = useState<
-    "Ready" | "Sold Out" | "All"
+    "Ready" | "Sold Out" | "All" | "Limit Stock"
   >("All");
   const filteredData =
     filterStatus === "All"
       ? data
+      : filterStatus === "Limit Stock"
+      ? data.filter((item) => item.stock < 5)
       : data.filter((item) => item.status === filterStatus);
   return (
     <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
@@ -220,6 +220,11 @@ export default function ItemsPage() {
             <MenubarMenu>
               <MenubarTrigger onClick={() => setFilterStatus("Ready")}>
                 Ready ({data.filter((item) => item.status === "Ready").length})
+              </MenubarTrigger>
+            </MenubarMenu>
+            <MenubarMenu>
+              <MenubarTrigger onClick={() => setFilterStatus("Limit Stock")}>
+                Limit Stock ({data.filter((item) => item.stock < 5).length})
               </MenubarTrigger>
             </MenubarMenu>
             <MenubarMenu>
