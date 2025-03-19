@@ -1,4 +1,4 @@
-import { columns } from "@/pages/item/columns-item";
+import { columns } from "@/pages/item/tables/columns-item";
 import { create } from "zustand";
 
 interface TableState {
