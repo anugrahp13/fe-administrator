@@ -32,6 +32,7 @@ export default function ItemsPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const { columns } = useTableStore();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedItems, setSelectedItems] = useState<number>(0); // ** Ambil daftar item yang dipilih **
   const filteredData: DataItem[] = dataItem
     .filter((item) => {
       if (filterStatus !== "All" && filterStatus !== "Limit Stock") {
@@ -50,7 +51,7 @@ export default function ItemsPage() {
   return (
     <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
       <div className="flex flex-col sm:flex-row justify-center sm:justify-between items-center py-2 sm:gap-0 w-full mx-auto gap-1">
-        <div className="flex flex-col items-center lg:items-start">
+        <div className="flex flex-col items-center sm:items-start">
           <div className="text-2xl lg:text-3xl font-bold">Item List</div>
           <Breadcrumb>
             <BreadcrumbList>
@@ -104,7 +105,11 @@ export default function ItemsPage() {
             <PackagePlus />
             Add Item
           </Button>
-          <Button variant="destructive" onClick={() => setIsModalOpen(true)}>
+          <Button
+            variant="destructive"
+            onClick={() => setIsModalOpen(true)}
+            disabled={selectedItems === 0}
+          >
             <Trash2 />
             Delete Item
           </Button>
