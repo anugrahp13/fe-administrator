@@ -12,7 +12,6 @@ import {
 import { Checkbox } from "@/components/ui/checkbox";
 import { DataItem } from "@/data/dataItem";
 
-
 export const columns: ColumnDef<DataItem>[] = [
   {
     id: "select",
@@ -58,7 +57,7 @@ export const columns: ColumnDef<DataItem>[] = [
     header: "Harga Jual",
     cell: ({ row }) => (
       <div className="font-medium capitalize">
-        Rp.{row.original.sellingPrice}
+        Rp. {row.original.sellingPrice.toLocaleString("id-ID")}
       </div>
     ),
   },
@@ -67,7 +66,7 @@ export const columns: ColumnDef<DataItem>[] = [
     header: "Harga Beli",
     cell: ({ row }) => (
       <div className="font-medium capitalize">
-        Rp.{row.original.purchasePrice}
+        Rp. {row.original.purchasePrice.toLocaleString("id-ID")}
       </div>
     ),
   },
