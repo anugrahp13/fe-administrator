@@ -24,7 +24,8 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-
+import EditDialog from "./edit-dialog";
+import AddDialog from "./add-dialog";
 export default function ItemsPage() {
   const [filterStatus, setFilterStatus] = useState<
     "Ready" | "Sold Out" | "All" | "Limit Stock"
@@ -32,6 +33,21 @@ export default function ItemsPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const { columns } = useTableStore();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
+  const [editItem, setEditItem] = useState<DataItem | null>(null);
+  const handleEditClick = (item: DataItem) => {
+    setEditItem(item);
+    setIsEditDialogOpen(true);
+  };
+  const handleSaveItem = (updatedItem: DataItem) => {
+    console.log("Updated item:", updatedItem);
+    // TODO: Simpan data ke backend atau update state global
+  };
+  const handleAddItem = (data: any) => {
+    console.log("Item Baru:", data);
+    setIsAddDialogOpen(false); // Tutup modal setelah submit
+  };
   const [selectedItems, setSelectedItems] = useState<number>(0); // ** Ambil daftar item yang dipilih **
   const filteredData: DataItem[] = dataItem
     .filter((item) => {
@@ -101,7 +117,7 @@ export default function ItemsPage() {
           className="max-w-sm"
         />
         <div className="flex gap-1">
-          <Button variant="outline">
+          <Button variant="outline" onClick={() => setIsAddDialogOpen(true)}>
             <PackagePlus />
             Add Item
           </Button>
@@ -115,7 +131,25 @@ export default function ItemsPage() {
           </Button>
         </div>
       </div>
-      <DataTable columns={columns} data={filteredData} />
+      <DataTable
+        columns={columns({ handleEditClick })}
+        data={filteredData}
+        onSelectionChange={(selected) => setSelectedItems(selected.length)}
+      />
+      {/* Dialog Add */}
+      <AddDialog
+        isOpen={isAddDialogOpen}
+        onClose={() => setIsAddDialogOpen(false)}
+        onSubmit={handleAddItem}
+      />
+
+      {/* Dialog Edit */}
+      <EditDialog
+        isOpen={isEditDialogOpen}
+        onClose={() => setIsEditDialogOpen(false)}
+        item={editItem}
+        onSave={handleSaveItem}
+      />
 
       {/* Modal Konfirmasi */}
       <AlertDialog open={isModalOpen} onOpenChange={setIsModalOpen}>
