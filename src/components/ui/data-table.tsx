@@ -16,13 +16,21 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "./button";
+import { useState } from "react";
 
-interface DataTableProps<TData> {
+interface DataTableProps<TData extends { id: string }> {
   columns: ColumnDef<TData>[];
   data: TData[];
+  onSelectionChange?: (selected: TData[]) => void;
 }
 
-export function DataTable<TData>({ columns, data }: DataTableProps<TData>) {
+export function DataTable<TData extends { id: string }>({
+  columns,
+  data,
+  onSelectionChange,
+}: DataTableProps<TData>) {
+  const [rowSelection, setRowSelection] = useState<Record<string, boolean>>({});
+
   const table = useReactTable({
     data,
     columns,
@@ -30,11 +38,22 @@ export function DataTable<TData>({ columns, data }: DataTableProps<TData>) {
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
+    state: { rowSelection },
+    onRowSelectionChange: (updater) => {
+      const newRowSelection =
+        typeof updater === "function" ? updater(rowSelection) : updater;
+      setRowSelection(newRowSelection);
+
+      // Ambil data yang dipilih berdasarkan indeks row yang dipilih
+      const selectedRows = Object.keys(newRowSelection)
+        .map((key) => data[parseInt(key, 10)])
+        .filter(Boolean);
+      onSelectionChange?.(selectedRows);
+    },
   });
 
   return (
     <div className="w-full">
-      {/* Table Content */}
       <div className="rounded-md border">
         <Table>
           <TableHeader>
@@ -74,7 +93,6 @@ export function DataTable<TData>({ columns, data }: DataTableProps<TData>) {
           </TableBody>
         </Table>
       </div>
-      {/* Pagination */}
       <div className="flex items-center justify-end space-x-2 py-4">
         <Button
           variant="outline"
