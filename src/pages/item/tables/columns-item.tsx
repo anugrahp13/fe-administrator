@@ -1,18 +1,14 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
-import { MoreHorizontal, Pencil, Trash2 } from "lucide-react";
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuLabel,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-} from "@/components/ui/dropdown-menu";
 import { Checkbox } from "@/components/ui/checkbox";
 import { DataItem } from "@/data/dataItem";
+import { Pencil } from "lucide-react";
 
-export const columns: ColumnDef<DataItem>[] = [
+export const columns = ({
+  handleEditClick,
+}: {
+  handleEditClick: (item: DataItem) => void;
+}): ColumnDef<DataItem>[] => [
   {
     id: "select",
     header: ({ table }) => (
@@ -36,6 +32,19 @@ export const columns: ColumnDef<DataItem>[] = [
     enableHiding: false,
   },
   {
+    accessorKey: "image",
+    header: "Gambar",
+    cell: ({ row }) => (
+      <div className="flex items-center">
+        <img
+          src={row.original.image}
+          alt="Item"
+          className="w-12 h-12 object-cover rounded"
+        />
+      </div>
+    ),
+  },
+  {
     accessorKey: "name",
     header: "Nama",
     cell: ({ row }) => <div className="capitalize">{row.original.name}</div>,
@@ -53,20 +62,20 @@ export const columns: ColumnDef<DataItem>[] = [
     cell: ({ row }) => <div className="lowercase">{row.original.stock}</div>,
   },
   {
-    accessorKey: "sellingPrice",
+    accessorKey: "sellPrice",
     header: "Harga Jual",
     cell: ({ row }) => (
       <div className="font-medium capitalize">
-        Rp. {row.original.sellingPrice.toLocaleString("id-ID")}
+        Rp. {row.original.sellPrice.toLocaleString("id-ID")}
       </div>
     ),
   },
   {
-    accessorKey: "purchasePrice",
+    accessorKey: "buyPrice",
     header: "Harga Beli",
     cell: ({ row }) => (
       <div className="font-medium capitalize">
-        Rp. {row.original.purchasePrice.toLocaleString("id-ID")}
+        Rp. {row.original.buyPrice.toLocaleString("id-ID")}
       </div>
     ),
   },
@@ -82,35 +91,9 @@ export const columns: ColumnDef<DataItem>[] = [
       const item = row.original;
 
       return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(item.id)}
-            >
-              Copy item ID
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <span className="flex justify-center items-center gap-2">
-                <Pencil />
-                Edit
-              </span>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <span className="flex justify-center items-center gap-2">
-                <Trash2 />
-                Delete
-              </span>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <Button variant="outline" onClick={() => handleEditClick(item)}>
+          <Pencil /> Edit
+        </Button>
       );
     },
   },
