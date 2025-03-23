@@ -15,8 +15,14 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Button } from "./button";
 import { useState } from "react";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+} from "@/components/ui/pagination";
+import { Button } from "./button";
 
 interface DataTableProps<TData extends { id: string }> {
   columns: ColumnDef<TData>[];
@@ -30,6 +36,10 @@ export function DataTable<TData extends { id: string }>({
   onSelectionChange,
 }: DataTableProps<TData>) {
   const [rowSelection, setRowSelection] = useState<Record<string, boolean>>({});
+  const [pagination, setPagination] = useState({
+    pageIndex: 0, // Halaman saat ini
+    pageSize: 5, // Jumlah item per halaman
+  });
 
   const table = useReactTable({
     data,
@@ -38,7 +48,11 @@ export function DataTable<TData extends { id: string }>({
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
-    state: { rowSelection },
+    state: {
+      rowSelection,
+      pagination,
+    },
+    onPaginationChange: setPagination,
     onRowSelectionChange: (updater) => {
       const newRowSelection =
         typeof updater === "function" ? updater(rowSelection) : updater;
@@ -51,6 +65,14 @@ export function DataTable<TData extends { id: string }>({
       onSelectionChange?.(selectedRows);
     },
   });
+
+  // Hitung jumlah halaman
+  const pageCount = table.getPageCount();
+
+  // Fungsi untuk menangani klik pada nomor halaman
+  const handlePageClick = (pageIndex: number) => {
+    table.setPageIndex(pageIndex);
+  };
 
   return (
     <div className="w-full">
@@ -78,14 +100,20 @@ export function DataTable<TData extends { id: string }>({
                 <TableRow key={row.id}>
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
                     </TableCell>
                   ))}
                 </TableRow>
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={columns.length} className="h-24 text-center">
+                <TableCell
+                  colSpan={columns.length}
+                  className="h-24 text-center"
+                >
                   No results.
                 </TableCell>
               </TableRow>
@@ -94,22 +122,41 @@ export function DataTable<TData extends { id: string }>({
         </Table>
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
-        >
-          Previous
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
-        >
-          Next
-        </Button>
+        <Pagination>
+          <PaginationContent>
+            <PaginationItem>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => table.previousPage()}
+                disabled={!table.getCanPreviousPage()}
+              >
+                Previous
+              </Button>
+            </PaginationItem>
+            {Array.from({ length: pageCount }, (_, index) => (
+              <PaginationItem key={index}>
+                <PaginationLink
+                  className="cursor-pointer"
+                  onClick={() => handlePageClick(index)}
+                  isActive={index === pagination.pageIndex}
+                >
+                  {index + 1}
+                </PaginationLink>
+              </PaginationItem>
+            ))}
+            <PaginationItem>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => table.nextPage()}
+                disabled={!table.getCanNextPage()}
+              >
+                Next
+              </Button>
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
       </div>
     </div>
   );
