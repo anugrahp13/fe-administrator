@@ -1,7 +1,7 @@
 import { CardInfo } from "@/components/card-info";
 import { dataDashboard } from "@/data/dataDashboard";
-import { VisitorChart } from "./visitor-chart";
 import { SalesCard } from "./sales-card";
+import { ItemBestSelling } from "./itemBest-card";
 export default function Dashboard() {
   return (
     <>
@@ -14,8 +14,8 @@ export default function Dashboard() {
             category.map((item: any, index: number) => {
               // Menentukan status pertama untuk setiap kategori
               const statusName = item.status?.[0]?.name || "";
-              const isSales = item.title === "Sales";
-              const isIncome = item.title === "Income";
+              const isSales = item.title === "Penjualan";
+              const isIncome = item.title === "Pendapatan";
 
               return (
                 <CardInfo
@@ -65,7 +65,7 @@ export default function Dashboard() {
         </div>
         <div className="flex flex-col md:flex-row gap-5">
           <div className="w-full md:w-3/5">
-            <VisitorChart />
+          <ItemBestSelling />
           </div>
           <div className="w-full md:w-2/5">
             <SalesCard />
