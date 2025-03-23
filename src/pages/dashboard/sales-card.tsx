@@ -18,9 +18,9 @@ export function SalesCard() {
     <Card className="w-full">
       <CardHeader>
         <div className="flex justify-between">
-          <CardTitle className="font-bold">Recent Sales</CardTitle>
+          <CardTitle className="font-bold">Penjualan Terbaru</CardTitle>
           <CardDescription className="dark:text-white font-semibold">
-            Top 10 Customers
+            10 Pelanggan Terbaik
           </CardDescription>
         </div>
         <CardDescription className="flex justify-center items-center font-semibold">
