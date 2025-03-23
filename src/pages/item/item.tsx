@@ -68,7 +68,7 @@ export default function ItemsPage() {
     <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
       <div className="flex flex-col sm:flex-row justify-center sm:justify-between items-center py-2 sm:gap-0 w-full mx-auto gap-1">
         <div className="flex flex-col items-center sm:items-start">
-          <div className="text-2xl lg:text-3xl font-bold">Item List</div>
+          <div className="text-2xl lg:text-3xl font-bold">Daftar Barang</div>
           <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem>
@@ -76,7 +76,7 @@ export default function ItemsPage() {
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
-                <BreadcrumbPage>Item List</BreadcrumbPage>
+                <BreadcrumbPage>Daftar Barang</BreadcrumbPage>
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
@@ -119,7 +119,7 @@ export default function ItemsPage() {
         <div className="flex gap-1">
           <Button variant="outline" onClick={() => setIsAddDialogOpen(true)}>
             <PackagePlus />
-            Add Item
+            Tambah Barang
           </Button>
           <Button
             variant="destructive"
@@ -127,7 +127,7 @@ export default function ItemsPage() {
             disabled={selectedItems === 0}
           >
             <Trash2 />
-            Delete Item
+            Hapus Barang
           </Button>
         </div>
       </div>

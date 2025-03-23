@@ -1,9 +1,4 @@
-import {
-  Banknote,
-  LucideIcon,
-  Package,
-  ShoppingCart,
-} from "lucide-react";
+import { Banknote, LucideIcon, Package, ShoppingCart } from "lucide-react";
 interface Sales {
   title: string;
   date: string;
@@ -52,8 +47,8 @@ interface DataDashboard {
 export const dataDashboard: DataDashboard = {
   sales: [
     {
-      title: "Sales",
-      date: "Today",
+      title: "Penjualan",
+      date: "Hari ini",
       icon: ShoppingCart,
       result: 3590,
       value: 35,
@@ -73,8 +68,8 @@ export const dataDashboard: DataDashboard = {
   ],
   income: [
     {
-      title: "Income",
-      date: "Today",
+      title: "Pendapatan",
+      date: "Hari ini",
       icon: Banknote,
       result: 12908000,
       value: 80,
@@ -94,8 +89,8 @@ export const dataDashboard: DataDashboard = {
   ],
   item: [
     {
-      title: "Item",
-      date: "Today",
+      title: "Barang",
+      date: "Hari ini",
       icon: Package,
       result: 700,
       value: 10,
