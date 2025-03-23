@@ -18,6 +18,7 @@ import {
   FormControl,
   FormMessage,
 } from "@/components/ui/form";
+import { Save } from "lucide-react";
 
 // Schema Validasi dengan zod
 const formSchema = z.object({
@@ -64,7 +65,7 @@ export default function AddDialog({
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Tambah Item</DialogTitle>
+          <DialogTitle>Tambah Barang</DialogTitle>
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(handleFormSubmit)}>
@@ -179,7 +180,10 @@ export default function AddDialog({
 
             {/* Tombol Submit */}
             <DialogFooter>
-              <Button type="submit">Simpan</Button>
+              <Button type="submit" className="bg-green-500 hover:bg-green-600">
+                <Save />
+                Simpan
+              </Button>
             </DialogFooter>
           </form>
         </Form>
