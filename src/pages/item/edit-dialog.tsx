@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/form";
 
 import { DataItem } from "@/data/dataItem";
+import { Save } from "lucide-react";
 
 const formSchema = z.object({
   image: z.string().min(1, "Gambar harus diisi"),
@@ -179,7 +180,10 @@ export default function EditDialog({
             </div>
             {/* Tombol Submit */}
             <DialogFooter>
-              <Button type="submit">Save</Button>
+              <Button type="submit" className="bg-green-500 hover:bg-green-600">
+                <Save />
+                Simpan
+              </Button>
             </DialogFooter>
           </form>
         </Form>
